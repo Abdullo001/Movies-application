@@ -9,7 +9,7 @@ export const Login = () => {
   const elPassword = useRef();
   const navigate = useNavigate();
 
-  const { token, setToken } = useAuth();
+  const {  setToken } = useAuth();
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
