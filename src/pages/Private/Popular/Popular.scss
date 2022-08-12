@@ -1,0 +1,20 @@
+.popular-list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  &:nth-child(3n){
+    margin-right: 0;
+  }
+}
+
+
+
+.popular-item{
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
