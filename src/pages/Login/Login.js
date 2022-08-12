@@ -26,7 +26,7 @@ export const Login = () => {
         }
       })
       .catch(function (error) {
-        console.log(error);
+        alert("User email or password is incorrect")
       });
   };
 
