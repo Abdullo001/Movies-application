@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Card } from "../../../components/Card/Card";
-import "./Popular.scss"
+import "./Popular.scss";
+import { Route, Routes } from "react-router-dom";
 
 export const Popular = () => {
   const [films, setFilms] = useState([]);
@@ -21,23 +22,47 @@ export const Popular = () => {
       .then(function () {});
   }, []);
 
-
-
-  return (
-    <div className="container">
+  const main = () => {
+    return (
       <div className="inner">
-        <h2 className="display-2 mb-5">Popular Movies Page</h2>
+        <h2 className="display-2 mb-5 text-center ">Popular Movies Page</h2>
         <ul className="popular-list">
           {films.map((film) => {
             return (
               <li key={film.id} className="popular-item">
-                <Card  film={film} />
-                
+                <Card film={film} />
               </li>
             );
           })}
         </ul>
       </div>
+    );
+  };
+
+  return (
+    <div className="container">
+      <Routes>
+        <Route
+          index
+          element={
+            <div className="inner">
+              <h2 className="display-2 mb-5 text-center ">
+                Popular Movies Page
+              </h2>
+              <ul className="popular-list">
+                {films.map((film) => {
+                  return (
+                    <li key={film.id} className="popular-item">
+                      <Card film={film} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          }
+        />
+        <Route path=":id" element={<singlePage />} />
+      </Routes>
     </div>
   );
 };

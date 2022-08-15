@@ -13,7 +13,7 @@ export const PrivatePage = () => {
 
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/popularMovies" element={<Popular/>}/>
+        <Route path="/popularMovies/*" element={<Popular/>}/>
         <Route path="/topratedMovies" element={<Top/>}/>
         <Route path="/upComingMovies" element={<Coming/>}/>
         <Route path="/tvShow" element={<Show/>}/>
