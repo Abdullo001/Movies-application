@@ -5,6 +5,8 @@ import { Popular } from "./Popular/Popular";
 import {Top} from "./Top/Top"
 import {Coming} from "./Coming/Coming"
 import {Show} from "./Show/Show"
+import { SinglePage } from "./singlePage/SinglePage";
+
 
 export const PrivatePage = () => {
   return (
@@ -13,7 +15,8 @@ export const PrivatePage = () => {
 
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/popularMovies/*" element={<Popular/>}/>
+        <Route path="/popularMovies" element={<Popular/>}/>
+        <Route path="/movie/:id" element={<SinglePage />} />
         <Route path="/topratedMovies" element={<Top/>}/>
         <Route path="/upComingMovies" element={<Coming/>}/>
         <Route path="/tvShow" element={<Show/>}/>
