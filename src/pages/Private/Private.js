@@ -6,6 +6,8 @@ import {Top} from "./Top/Top"
 import {Coming} from "./Coming/Coming"
 import {Show} from "./Show/Show"
 import { SinglePage } from "./singlePage/SinglePage";
+import { TvSinglePage } from "./singlePage/TvSinglePage";
+import { SearchPage } from "../search/Search";
 
 
 export const PrivatePage = () => {
@@ -17,6 +19,8 @@ export const PrivatePage = () => {
         <Route path="/" element={<Home/>}/>
         <Route path="/popularMovies" element={<Popular/>}/>
         <Route path="/movie/:id" element={<SinglePage />} />
+        <Route path="/tv/:id" element={<TvSinglePage />} />
+        <Route path="/movie/:searchQuery" element={<SearchPage />} />
         <Route path="/topratedMovies" element={<Top/>}/>
         <Route path="/upComingMovies" element={<Coming/>}/>
         <Route path="/tvShow" element={<Show/>}/>

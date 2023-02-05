@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 
 export const Header = () => {
+
+  const [inputVal,setInputVal]=useState("")
+  const navigate=useNavigate()
+  useEffect(()=>{
+    if(inputVal.trim().length){
+      navigate('/search/'+inputVal)
+    }else{
+      navigate("/")
+    }
+  },[inputVal])
+
   return (
     <header className="header">
       <div className="container">
@@ -26,7 +38,7 @@ export const Header = () => {
             </ol>
           </nav>
 
-          <input type={"search"} placeholder="Search..." />
+          <input  type={"search"} onKeyUp={(evt)=>{setInputVal(evt.target.value)}} placeholder="Search..." />
         </div>
       </div>
     </header>
