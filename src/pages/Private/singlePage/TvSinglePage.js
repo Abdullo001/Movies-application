@@ -5,21 +5,20 @@ import axios from "axios";
 import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
 
-export const SinglePage = () => {
+export const TvSinglePage = () => {
   const { id } = useParams();
   const [film, setFilm] = useState({});
 
   useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?`,{
-          params:{
-            api_key:"3a6e18fcdc951cb11feea5ceb4cc6b37",
-          }
-        }
-      )
+      .get(`https://api.themoviedb.org/3//tv/${id}?`, {
+        params: {
+          api_key: "3a6e18fcdc951cb11feea5ceb4cc6b37",
+        },
+      })
       .then(function (response) {
         setFilm(response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -31,7 +30,7 @@ export const SinglePage = () => {
 
   return (
     <div className="container">
-      {film.title && (
+      {film.name && (
         <div className="single-inner">
           <BackImgBox>
             <BackImg
@@ -51,7 +50,7 @@ export const SinglePage = () => {
                   className="homepage"
                   target={"_blank"}
                 >
-                  {film.title}
+                  {film.original_name}
                 </a>
                 <small className="text-muted d-block  secondary">
                   {film.tagline}
@@ -61,58 +60,69 @@ export const SinglePage = () => {
               <div className="rating-box">
                 <span className="rating">
                   <AiFillStar className="star" />
-                  {film.title && film.vote_average.toFixed(1)}
+                  {film.vote_average.toFixed(1)}
                 </span>
                 <span className="adult">{film?.adult ? "18+" : "12+"}</span>
               </div>
 
               <span className="year">
                 {" "}
-                Year: <span>{film.release_date}</span>
+                Year: <span>{film.first_air_date}</span>
               </span>
               <span className="country">
                 Country:{" "}
-                <span>
-                  {film.title && film?.production_countries[0]?.iso_3166_1}
-                </span>
+                <span>{film?.production_countries[0]?.iso_3166_1}</span>
               </span>
 
               <span className="budget">
                 Budget:
                 {film.budget ? (
-                  <span>{`${
-                    film.title && film?.budget / 1000000
-                  } million $`}</span>
+                  <span>{`${film?.budget / 1000000} million $`}</span>
                 ) : (
                   <span> not identified</span>
                 )}
               </span>
 
+              <span className="season">
+                Seasons:
+                <span>{film.number_of_seasons}</span>
+              </span>
+
+              <span className="episodes">
+                Episodes:
+                <span>{film.number_of_episodes}</span>
+              </span>
+
               <span className="time">
                 Time:{" "}
                 <span>
-                  {`${film.title && Math.floor(film.runtime / 60)} hour ${
-                    film.runtime - Math.floor(film.runtime / 60) * 60
-                  } minutes`}
+                  {film.episode_run_time < 60
+                    ? ` ${
+                        film.episode_run_time -
+                        Math.floor(film.episode_run_time / 60) * 60
+                      } minutes`
+                    : ` ${Math.floor(film.episode_run_time / 60)} hour
+                        ${
+                          film.episode_run_time -
+                          Math.floor(film.episode_run_time / 60) * 60
+                        } minutes`}
                 </span>
               </span>
 
               <span className="languages">
                 Spoken languages:{" "}
-                {film.title &&
-                  film.spoken_languages.map((e) => {
-                    return (
-                      <span key={e.iso_639_1}>{` ${e.english_name}  `}</span>
-                    );
-                  })}
+                {film.spoken_languages.map((e) => {
+                  return (
+                    <span key={e.iso_639_1}>{` ${e.english_name}  `}</span>
+                  );
+                })}
               </span>
 
               <span className="ganres">
                 Ganres:{" "}
-                {film.title &&
-                  film.genres.map((e) => {
-                    return <span key={e.id}>{` ${e.name}  `}</span>;
-                  })}
+                {film.genres.map((e) => {
+                  return <span key={e.id}>{` ${e.name}  `}</span>;
+                })}
               </span>
 
               <p className="overview">{film.overview}</p>
